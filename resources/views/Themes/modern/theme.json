@@ -1,0 +1,8 @@
+{
+  "name": "modern",
+  "title": "modern",
+  "description": "This is the child them of paymoney landing page and user dashboard.",
+  "author": "Abul Hasan",
+  "version": "1.0",
+  "parent": "default"
+}
