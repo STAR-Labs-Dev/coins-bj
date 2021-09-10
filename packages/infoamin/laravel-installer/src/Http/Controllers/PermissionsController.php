@@ -110,7 +110,7 @@ class PermissionsController extends PermissionsChecker
             'envatopurchasecode' => $envatopurchasecode,
         );
 
-        // $url = "http://envatoapi.techvill.net/";
+        // $url = "http://envatoapi.techvill.net/";ee
         $url = "https://envatoapi.techvill.org/installation/";
 
         $ch = curl_init();
