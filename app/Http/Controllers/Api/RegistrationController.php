@@ -105,14 +105,16 @@ class RegistrationController extends Controller
         $rules = array(
             'first_name' => 'required',
             'last_name'  => 'required',
-            'email'      => 'required|email|unique:users,email',
+            'phone'  => 'required|unique:users,phone',
+            // 'email'      => 'required|email|unique:users,email',
             'password'   => 'required',
         );
 
         $fieldNames = array(
             'first_name' => 'First Name',
             'last_name'  => 'Last Name',
-            'email'      => 'Email',
+            'phone'  => 'Phone',
+            // 'email'      => 'Email',
             'password'   => 'Password',
         );
 

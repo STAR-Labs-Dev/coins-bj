@@ -78,13 +78,13 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputAddress">@lang('message.registration.email')<span class="text-danger">*</span></label>
-                                                <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}">
-                                                @if($errors->has('email'))
+                                                <label for="inputAddress">@lang('message.registration.email')</label>
+                                                <input type="email" class="form-control" id="email" name="email">
+                                                {{-- @if($errors->has('email'))
                                                 <span class="error">
                                                     {{ $errors->first('email') }}
                                                 </span>
-                                                @endif
+                                                @endif --}}
                                                 <span id="email_error"></span>
                                                 <span id="email_ok" class="text-success"></span>
                                             </div>
@@ -92,9 +92,14 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="inputAddress">@lang('message.registration.phone')</span></label>
+                                                <label for="inputAddress">@lang('message.registration.phone')</span><span class="text-danger">*</span></label>
                                                 <br>
-                                                <input type="tel" class="form-control" id="phone" name="phone">
+                                                <input type="tel" class="form-control" id="phone" name="phone"  value="{{old('phone')}}">
+                                                @if($errors->has('phone'))
+                                                <span class="error">
+                                                    {{ $errors->first('phone') }}
+                                                </span>
+                                                @endif
                                                 <span id="phone-error"></span>
                                                 <span id="tel-error"></span>
                                             </div>
@@ -213,9 +218,13 @@
             last_name: {
                 required: true,
             },
-            email: {
+            // email: {
+            //     required: true,
+            //     email: true,
+            // },
+            phone: {
                 required: true,
-                email: true,
+                phone: true,
             },
             password: {
                 required: true,
@@ -255,6 +264,7 @@ intlTelInput
 
         $("#phone").intlTelInput({
             separateDialCode: true,
+            initialCountry: "bj",
             nationalMode: true,
             preferredCountries: [countryShortCode],
             autoPlaceholder: "polite",

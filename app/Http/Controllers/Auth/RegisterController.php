@@ -63,7 +63,8 @@ class RegisterController extends Controller
                 $rules = array(
                     'first_name'            => 'required',
                     'last_name'             => 'required',
-                    'email'                 => 'required|email|unique:users,email',
+                    // 'email'                 => 'required|email|unique:users,email',
+                    'phone'                 => 'required|unique:users,phone',
                     'password'              => 'required|confirmed',
                     'password_confirmation' => 'required',
                     'g-recaptcha-response'  => 'required|captcha',
@@ -72,7 +73,8 @@ class RegisterController extends Controller
                 $fieldNames = array(
                     'first_name'            => 'First Name',
                     'last_name'             => 'Last Name',
-                    'email'                 => 'Email',
+                    // 'email'                 => 'Email',
+                    'phone'                 => 'Phone',
                     'password'              => 'Password',
                     'password_confirmation' => 'Confirm Password',
                     'g-recaptcha-response'  => 'Captcha'
@@ -82,21 +84,25 @@ class RegisterController extends Controller
                 $rules = array(
                     'first_name'            => 'required',
                     'last_name'             => 'required',
-                    'email'                 => 'required|email|unique:users,email',
+                    // 'email'                 => 'required|email|unique:users,email',
+                    'phone'                 => 'required|unique:users,phone',
                     'password'              => 'required|confirmed',
                     'password_confirmation' => 'required',
                 );
                 $fieldNames = array(
                     'first_name'            => 'First Name',
                     'last_name'             => 'Last Name',
-                    'email'                 => 'Email',
+                    // 'email'                 => 'Email',
+                    'phone'                 => 'Phone',
                     'password'              => 'Password',
                     'password_confirmation' => 'Confirm Password',
                 );
+              
             }
 
             $validator = Validator::make($request->all(), $rules);
             $validator->setAttributeNames($fieldNames);
+            // dd($validator);
             if ($validator->fails())
             {
                 return back()->withErrors($validator)->withInput();
@@ -133,7 +139,7 @@ class RegisterController extends Controller
                         return redirect('/login');
                     }
 
-                    $userEmail          = $user->email;
+                     $userEmail          = $user->email;
                     $userFormattedPhone = $user->formattedPhone;
 
                     // Process Registered User Transfers
