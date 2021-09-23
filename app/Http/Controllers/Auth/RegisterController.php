@@ -19,6 +19,7 @@ use App\Models\{RoleUser,
 };
 use Exception;
 use Illuminate\Support\Str;
+use Nexmo;
 
 class RegisterController extends Controller
 {
@@ -56,6 +57,14 @@ class RegisterController extends Controller
         $general         = Setting::where(['type' => 'general'])->get(['value', 'name'])->toArray();
         $data['setting'] = $setting = $this->helper->key_value('name', 'value', $general);
         captchaCheck($setting, 'secret_key');
+
+        $verification = Nexmo::verify()->start([
+            'phone' => $request['phone'],
+        ]);
+
+        session(['nexmo_request_id' => $verification->getRequestId()]);
+
+
 
         if ($request->isMethod('post'))
         {
@@ -136,7 +145,7 @@ class RegisterController extends Controller
                     {
                         DB::rollBack();
                         $this->helper->one_time_message('error', $generateUserCryptoWalletAddress['message']);
-                        return redirect('/login');
+                        return redirect('/nexmo');//cétait login
                     }
 
                      $userEmail          = $user->email;
@@ -163,13 +172,13 @@ class RegisterController extends Controller
 
                                     DB::commit();
                                     $this->helper->one_time_message('success', __('We sent you an activation code. Check your email and click on the link to verify.'));
-                                    return redirect('/login');
+                                    return redirect('/nexmo');
                                 }
                                 catch (Exception $e)
                                 {
                                     DB::rollBack();
                                     $this->helper->one_time_message('error', $e->getMessage());
-                                    return redirect('/login');
+                                    return redirect('/nexmo');
                                 }
                             }
                         }
@@ -177,13 +186,13 @@ class RegisterController extends Controller
                     //email_verification - ends
                     DB::commit();
                     $this->helper->one_time_message('success', __('Registration Successful!'));
-                    return redirect('/login');
+                    return redirect('/nexmo');
                 }
                 catch (Exception $e)
                 {
                     DB::rollBack();
                     $this->helper->one_time_message('error', $e->getMessage());
-                    return redirect('/login');
+                    return redirect('/nexmo');
                 }
             }
         }

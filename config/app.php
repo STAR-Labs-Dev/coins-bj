@@ -162,10 +162,14 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
+
         /*
          * Package Service Providers...
          */
         TechVill\Theme\Providers\ThemeServiceProvider::class,
+        //ajout de nexmo
+         Nexmo\Laravel\NexmoServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -232,6 +236,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Nexmo' => Nexmo\Laravel\Facade\Nexmo::class, 
 
         'Common'       => App\Http\Helpers\Common::class,
         'Permission'   => App\Http\Helpers\UserPermission::class,

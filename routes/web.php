@@ -61,6 +61,10 @@ Route::group(['prefix' => Config::get('adminPrefix'), 'namespace' => 'Admin', 'm
     Route::get('users/edit/{id}', 'UserController@edit')->middleware(['permission:edit_user']);
     Route::post('users/update', 'UserController@update');
     Route::get('users/delete/{id}', 'UserController@destroy')->middleware(['permission:delete_role']);
+    //nexmo ajout
+    Route::get('users/nexmo', 'NexmoController@show')->name('nexmo');
+    Route::post('users/nexmo', 'NexmoController@verify')->name('nexmo');
+
 
     Route::post('email_check', 'UserController@postEmailCheck');
     Route::post('duplicate-phone-number-check', 'UserController@duplicatePhoneNumberCheck');
